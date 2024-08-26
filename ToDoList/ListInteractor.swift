@@ -18,7 +18,7 @@ extension ListInteractor: ListInteractorProtocol {
                 case .success(let todos):
                     self?.presenter?.didLoad(data: todos)
                 case .failure(let failure):
-                    fatalError("Fail")
+                    fatalError("Fail:\(failure)")
                     break
                 }
             }

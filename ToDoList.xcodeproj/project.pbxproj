@@ -16,7 +16,7 @@
 		651550892C7C84540025FF74 /* ListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651550882C7C84540025FF74 /* ListRouter.swift */; };
 		6515508B2C7C85510025FF74 /* ListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6515508A2C7C85510025FF74 /* ListInteractor.swift */; };
 		6515508D2C7C862E0025FF74 /* ListModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6515508C2C7C862E0025FF74 /* ListModuleBuilder.swift */; };
-		651550902C7C8D8B0025FF74 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6515508F2C7C8D8B0025FF74 /* Todo.swift */; };
+		651550902C7C8D8B0025FF74 /* TodoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6515508F2C7C8D8B0025FF74 /* TodoData.swift */; };
 		651550922C7CB6950025FF74 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651550912C7CB6950025FF74 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +32,7 @@
 		651550882C7C84540025FF74 /* ListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRouter.swift; sourceTree = "<group>"; };
 		6515508A2C7C85510025FF74 /* ListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInteractor.swift; sourceTree = "<group>"; };
 		6515508C2C7C862E0025FF74 /* ListModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModuleBuilder.swift; sourceTree = "<group>"; };
-		6515508F2C7C8D8B0025FF74 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		6515508F2C7C8D8B0025FF74 /* TodoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoData.swift; sourceTree = "<group>"; };
 		651550912C7CB6950025FF74 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,7 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				651550912C7CB6950025FF74 /* NetworkManager.swift */,
-				6515508F2C7C8D8B0025FF74 /* Todo.swift */,
+				6515508F2C7C8D8B0025FF74 /* TodoData.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -171,7 +171,7 @@
 				6515508D2C7C862E0025FF74 /* ListModuleBuilder.swift in Sources */,
 				6515508B2C7C85510025FF74 /* ListInteractor.swift in Sources */,
 				651550762C7C7AF40025FF74 /* ListViewController.swift in Sources */,
-				651550902C7C8D8B0025FF74 /* Todo.swift in Sources */,
+				651550902C7C8D8B0025FF74 /* TodoData.swift in Sources */,
 				651550722C7C7AF40025FF74 /* AppDelegate.swift in Sources */,
 				651550922C7CB6950025FF74 /* NetworkManager.swift in Sources */,
 				651550872C7C83050025FF74 /* ListPresenter.swift in Sources */,

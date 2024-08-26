@@ -23,7 +23,7 @@ extension ListPresenter: ListPresenterProtocol {
     }
     
     func didLoad(data: [Todo]) {
-        
+        view?.showData(data: data)
     }
     
     
