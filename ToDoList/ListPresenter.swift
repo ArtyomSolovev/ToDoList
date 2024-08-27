@@ -3,6 +3,7 @@ import Foundation
 protocol ListPresenterProtocol: AnyObject {
     func viewDidLoaded()
     func didLoad(data: [Todo])
+    func didTapNewTaskButton()
 }
 
 class ListPresenter {
@@ -26,5 +27,14 @@ extension ListPresenter: ListPresenterProtocol {
         view?.showData(data: data)
     }
     
+    func didTapNewTaskButton() {
+        let task = Todo(
+            id: 0,
+            todo: "",
+            completed: false,
+            date: Date.getCurrectDate()
+        )
+        router.openTask(task: task)
+    }
     
 }

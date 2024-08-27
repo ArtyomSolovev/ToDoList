@@ -1,14 +1,14 @@
 import Foundation
 
-class ListModuleBuilder {
-    static func build() -> ListViewController {
-        let interactor = ListInteractor()
-        let router = ListRouter()
-        let presenter = ListPresenter(
+class TaskModuleBuilder {
+    static func build(todo: Todo) -> TaskViewController {
+        let interactor = TaskInteractor(todo: todo)
+        let router = TaskRouter()
+        let presenter = TaskPresenter(
             router: router,
             interactor: interactor
         )
-        let viewController = ListViewController()
+        let viewController = TaskViewController()
         viewController.presenter = presenter
         presenter.view = viewController
         interactor.presenter = presenter

@@ -13,6 +13,15 @@ class ListViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
+    
+    let button: UIButton = {
+        let button = UIButton()
+        button.setTitle("Новая задача", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.layer.cornerRadius = 10
+//        button.clipsToBounds = true
+        return button
+    }()
 
     var presenter: ListPresenterProtocol?
     
@@ -20,6 +29,8 @@ class ListViewController: UIViewController {
         super.viewDidLoad()
         presenter?.viewDidLoaded()
         configureTableView()
+        configureButton()
+        button.addTarget(self, action: #selector(createTask), for: .touchUpInside)
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -29,9 +40,22 @@ class ListViewController: UIViewController {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
+    }
+    
+    func configureButton() {
+        view.addSubview(button)
+        NSLayoutConstraint.activate([
+            button.topAnchor.constraint(equalTo: tableView.bottomAnchor),
+            button.leftAnchor.constraint(equalTo: view.leftAnchor),
+            button.rightAnchor.constraint(equalTo: view.rightAnchor),
+            button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
+    @objc func createTask(sender: UIButton!) {
+        presenter?.didTapNewTaskButton()
     }
 }
 
