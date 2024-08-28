@@ -15,15 +15,16 @@ final class NetworkManager {
             do {
                 let data = try JSONDecoder().decode(Welcome.self, from: data)
                 var todos = [Todo]()
-                data.todos.forEach{
-                    todos.append(
-                    Todo(
-                        id: $0.id,
-                        todo: $0.todo,
-                        completed: $0.completed,
-                        date: Date.getCurrectDate()
-                    )
-                )}
+                data.todos.forEach {
+                    let todo = Todo(
+                            id: $0.id,
+                            header: $0.header,
+                            todo: $0.todo,
+                            completed: $0.completed,
+                            date: Date.getCurrectDate()
+                        )
+                    todos.append(todo)
+                }
                 completion(.success(todos))
             } catch {
                 completion(.failure(error))

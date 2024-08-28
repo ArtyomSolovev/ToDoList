@@ -30,6 +30,7 @@ extension ListPresenter: ListPresenterProtocol {
     func didTapNewTaskButton() {
         let task = Todo(
             id: 0,
+            header: "",
             todo: "",
             completed: false,
             date: Date.getCurrectDate()

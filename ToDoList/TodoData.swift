@@ -9,12 +9,14 @@ struct Welcome: Codable {
 // MARK: - Todo
 struct Todo: Codable {
     let id: Int
+    let header: String?
     let todo: String
     let completed: Bool
     let date: String?
     
-    init(id: Int, todo: String, completed: Bool, date: String) {
+    init(id: Int, header: String?, todo: String, completed: Bool, date: String) {
         self.id = id
+        self.header = header
         self.todo = todo
         self.completed = completed
         self.date = date
@@ -25,6 +27,7 @@ struct Todo: Codable {
         id = try container.decode(Int.self, forKey: .id)
         todo = try container.decode(String.self, forKey: .todo)
         completed = try container.decode(Bool.self, forKey: .completed)
+        header = nil
         date = nil
     }
     

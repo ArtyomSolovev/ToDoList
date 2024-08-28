@@ -25,6 +25,9 @@
 		6515509D2C7D07960025FF74 /* TaskRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6515509C2C7D07960025FF74 /* TaskRouter.swift */; };
 		6515509F2C7DF4F40025FF74 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6515509E2C7DF4F40025FF74 /* Extension.swift */; };
 		651550A22C7E13350025FF74 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651550A12C7E13350025FF74 /* ListTableViewCell.swift */; };
+		651550A62C7F3C510025FF74 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 651550A42C7F3C510025FF74 /* CoreData.xcdatamodeld */; };
+		651550AA2C7F41160025FF74 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651550A82C7F41160025FF74 /* Task+CoreDataProperties.swift */; };
+		651550AC2C7F41E90025FF74 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651550AB2C7F41E90025FF74 /* StorageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +51,9 @@
 		6515509C2C7D07960025FF74 /* TaskRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRouter.swift; sourceTree = "<group>"; };
 		6515509E2C7DF4F40025FF74 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		651550A12C7E13350025FF74 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		651550A52C7F3C510025FF74 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
+		651550A82C7F41160025FF74 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		651550AB2C7F41E90025FF74 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +70,7 @@
 		651550652C7C7AF40025FF74 = {
 			isa = PBXGroup;
 			children = (
+				651550A82C7F41160025FF74 /* Task+CoreDataProperties.swift */,
 				651550702C7C7AF40025FF74 /* ToDoList */,
 				6515506F2C7C7AF40025FF74 /* Products */,
 			);
@@ -83,6 +90,7 @@
 				651550712C7C7AF40025FF74 /* AppDelegate.swift */,
 				651550732C7C7AF40025FF74 /* SceneDelegate.swift */,
 				6515509E2C7DF4F40025FF74 /* Extension.swift */,
+				651550A32C7F3C0E0025FF74 /* CoreData */,
 				6515508E2C7C8CC40025FF74 /* API */,
 				651550A02C7E130C0025FF74 /* List */,
 				651550932C7CFAB70025FF74 /* Task */,
@@ -125,6 +133,15 @@
 				651550A12C7E13350025FF74 /* ListTableViewCell.swift */,
 			);
 			path = List;
+			sourceTree = "<group>";
+		};
+		651550A32C7F3C0E0025FF74 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				651550A42C7F3C510025FF74 /* CoreData.xcdatamodeld */,
+				651550AB2C7F41E90025FF74 /* StorageManager.swift */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,10 +219,13 @@
 				6515508B2C7C85510025FF74 /* ListInteractor.swift in Sources */,
 				651550762C7C7AF40025FF74 /* ListViewController.swift in Sources */,
 				651550902C7C8D8B0025FF74 /* TodoData.swift in Sources */,
+				651550A62C7F3C510025FF74 /* CoreData.xcdatamodeld in Sources */,
 				651550722C7C7AF40025FF74 /* AppDelegate.swift in Sources */,
 				651550972C7CFB7B0025FF74 /* TaskModuleBuilder.swift in Sources */,
 				651550922C7CB6950025FF74 /* NetworkManager.swift in Sources */,
+				651550AC2C7F41E90025FF74 /* StorageManager.swift in Sources */,
 				651550A22C7E13350025FF74 /* ListTableViewCell.swift in Sources */,
+				651550AA2C7F41160025FF74 /* Task+CoreDataProperties.swift in Sources */,
 				6515509B2C7D076C0025FF74 /* TaskPresenter.swift in Sources */,
 				6515509D2C7D07960025FF74 /* TaskRouter.swift in Sources */,
 				651550872C7C83050025FF74 /* ListPresenter.swift in Sources */,
@@ -425,6 +445,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		651550A42C7F3C510025FF74 /* CoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				651550A52C7F3C510025FF74 /* CoreData.xcdatamodel */,
+			);
+			currentVersion = 651550A52C7F3C510025FF74 /* CoreData.xcdatamodel */;
+			name = CoreData.xcdatamodeld;
+			path = /Users/artemsolovev/Documents/ToDoList/ToDoList/CoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 651550662C7C7AF40025FF74 /* Project object */;
 }
