@@ -17,6 +17,7 @@ class ListViewController: UIViewController {
     let button: UIButton = {
         let button = UIButton()
         button.setTitle("Новая задача", for: .normal)
+        button.setTitleColor(UIColor(named: "textColor"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
 //        button.layer.cornerRadius = 10
 //        button.clipsToBounds = true
@@ -34,6 +35,7 @@ class ListViewController: UIViewController {
         tableView.register(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.reuseId)
         tableView.delegate = self
         tableView.dataSource = self
+        view.backgroundColor = .systemBackground
     }
 
     func configureTableView() {
@@ -41,7 +43,7 @@ class ListViewController: UIViewController {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            tableView.rightAnchor.constraint(equalTo: view.rightAnchor)
+            tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor)
         ])
     }
     
@@ -49,8 +51,8 @@ class ListViewController: UIViewController {
         view.addSubview(button)
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(equalTo: tableView.bottomAnchor),
-            button.leftAnchor.constraint(equalTo: view.leftAnchor),
-            button.rightAnchor.constraint(equalTo: view.rightAnchor),
+            button.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            button.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
