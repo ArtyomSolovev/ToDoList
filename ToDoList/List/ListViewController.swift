@@ -31,6 +31,7 @@ class ListViewController: UIViewController {
         configureTableView()
         configureButton()
         button.addTarget(self, action: #selector(createTask), for: .touchUpInside)
+        tableView.register(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.reuseId)
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -69,8 +70,9 @@ extension ListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = data[indexPath.row].todo
+        let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.reuseId, for: indexPath) as! ListTableViewCell
+        let task = data[indexPath.row]
+        cell.setData(task: task)
         return cell
     }
     
