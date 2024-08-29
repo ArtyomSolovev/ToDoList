@@ -8,7 +8,7 @@ struct Welcome: Codable {
 
 // MARK: - Todo
 struct Todo: Codable {
-    let id: Int16
+    var id: Int16
     let header: String?
     let text: String
     var isCompleted: Bool

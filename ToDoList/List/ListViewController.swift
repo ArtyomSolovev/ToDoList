@@ -89,6 +89,9 @@ extension ListViewController: UITableViewDataSource {
             todos.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
+        for index in indexPath.row..<todos.count {
+            todos[index].id -= 1
+        }
     }
     
 }
