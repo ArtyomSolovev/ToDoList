@@ -6,9 +6,15 @@ protocol TaskInteractorProtocol {
     func updateTask(task: Todo)
 }
 
+protocol TaskInteractoreDelegate: AnyObject {
+    func saveTask(task: Todo)
+    func updateTask(task: Todo)
+}
+
 class TaskInteractor {
     
     weak var presenter: TaskPresenterProtocol?
+    weak var delegate: TaskInteractoreDelegate?
     
     let todo: Todo
     let newTask: Bool
@@ -25,10 +31,12 @@ extension TaskInteractor: TaskInteractorProtocol {
     
     func saveTask(task: Todo) {
         CoreDataManager.shared.createTask(todo: task)
+        delegate?.saveTask(task: task)
     }
     
     func updateTask(task: Todo) {
         CoreDataManager.shared.updataTask(todo: task)
+        delegate?.updateTask(task: task)
     }
     
     func getTask() -> (Todo, Bool)  {

@@ -35,7 +35,8 @@ extension ListPresenter: ListPresenterProtocol {
     }
     
     func openTask(task: Todo, newTask: Bool) {
-        router.openTask(task: task, newTask: newTask)
+        guard let interactorForDelegate = interactor as? ListInteractor else { return }
+        router.openTask(task: task, newTask: newTask, forDelegate: interactorForDelegate)
     }
     
     func viewDidLoaded() {

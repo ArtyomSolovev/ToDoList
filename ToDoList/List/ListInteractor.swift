@@ -70,3 +70,18 @@ extension ListInteractor: ListInteractorProtocol {
     }
     
 }
+
+extension ListInteractor: TaskInteractoreDelegate {
+    
+    func saveTask(task: Todo) {
+        tasks?.append(task)
+        presenter?.didLoad()
+    }
+    
+    func updateTask(task: Todo) {
+        guard let index = tasks?.firstIndex(where: { $0.id == task.id }) else { return }
+        tasks?[index] = task
+        presenter?.didLoad()
+    }
+    
+}

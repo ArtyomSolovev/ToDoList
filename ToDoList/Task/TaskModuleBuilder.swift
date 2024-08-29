@@ -1,7 +1,7 @@
 import Foundation
 
 class TaskModuleBuilder {
-    static func build(todo: Todo, newTask: Bool) -> TaskViewController {
+    static func build(todo: Todo, newTask: Bool, forDelegate: ListInteractor) -> TaskViewController {
         let interactor = TaskInteractor(todo: todo, newTask: newTask)
         let router = TaskRouter()
         let presenter = TaskPresenter(
@@ -12,6 +12,7 @@ class TaskModuleBuilder {
         viewController.presenter = presenter
         presenter.view = viewController
         interactor.presenter = presenter
+        interactor.delegate = forDelegate
         router.viewController = viewController
         return viewController
     }

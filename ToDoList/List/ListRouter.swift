@@ -1,7 +1,7 @@
 import Foundation
 
 protocol ListRouterProtocol: AnyObject {
-    func openTask(task: Todo, newTask: Bool)
+    func openTask(task: Todo, newTask: Bool, forDelegate: ListInteractor)
 }
 
 class ListRouter {
@@ -10,8 +10,8 @@ class ListRouter {
 
 extension ListRouter: ListRouterProtocol{
     
-    func openTask(task: Todo, newTask: Bool) {
-        let taskViewController = TaskModuleBuilder.build(todo: task, newTask: newTask)
+    func openTask(task: Todo, newTask: Bool, forDelegate: ListInteractor) {
+        let taskViewController = TaskModuleBuilder.build(todo: task, newTask: newTask, forDelegate: forDelegate)
         viewController?.present(taskViewController, animated: true)
     }
     
