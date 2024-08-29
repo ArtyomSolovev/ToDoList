@@ -68,6 +68,7 @@ extension ListViewController: UITableViewDelegate {
 }
 
 extension ListViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         todos.count
     }
@@ -77,6 +78,13 @@ extension ListViewController: UITableViewDataSource {
         let task = todos[indexPath.row]
         cell.setData(task: task, viewController: self)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            todos.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
     
 }
