@@ -1,13 +1,11 @@
 import UIKit
 
 protocol ListViewProtocol: AnyObject {
-    func showData(data: [Todo])
-    func updateStateOfTask(id: Int16)
+    func showData()
+    func updateStateOfTask(id: UUID)
 }
 
 class ListViewController: UIViewController {
-    
-    var todos = [Todo]()
     
     let tableView: UITableView = {
         let tableView = UITableView()
@@ -60,21 +58,22 @@ class ListViewController: UIViewController {
     
     @objc func createTask(sender: UIButton!) {
         let task = Todo(
-            id: Int16(todos.count),
+            id: UUID(),
             header: nil,
             todo: "",
             completed: false,
             date: Date.getCurrectDate()
         )
-        presenter?.openTask(task: task)
-//        presenter?.didTapNewTaskButton()
+        presenter?.openTask(task: task, newTask: true)
     }
 }
 
 extension ListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.openTask(task: todos[indexPath.row])
+        let tasks = presenter?.getTasks()
+        guard let task = tasks?[indexPath.row] else { return }
+        presenter?.openTask(task: task, newTask: false)
     }
     
 }
@@ -82,23 +81,21 @@ extension ListViewController: UITableViewDelegate {
 extension ListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        todos.count
+        presenter?.getTasks().count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.reuseId, for: indexPath) as! ListTableViewCell
-        let task = todos[indexPath.row]
+        let tasks = presenter?.getTasks()
+        guard let task = tasks?[indexPath.row] else { return cell }
         cell.setData(task: task, viewController: self)
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            todos.remove(at: indexPath.row)
+            presenter?.removeTask(forIndex: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-        for index in indexPath.row..<todos.count {
-            todos[index].id -= 1
         }
     }
     
@@ -106,17 +103,13 @@ extension ListViewController: UITableViewDataSource {
 
 extension ListViewController: ListViewProtocol {
     
-    func updateStateOfTask(id: Int16) {
-        DispatchQueue.main.async { [self] in
-            guard let index = todos.firstIndex(where: { $0.id == id}) else { return }
-            todos[index].isCompleted.toggle()
-            tableView.reloadData()
-        }
+    func updateStateOfTask(id: UUID) {
+        presenter?.updateStateOfTask(id: id)
+        tableView.reloadData()
     }
     
-    func showData(data: [Todo]) {
+    func showData() {
         DispatchQueue.main.async {
-            self.todos = data
             self.tableView.reloadData()
         }
     }

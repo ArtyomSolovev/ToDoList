@@ -10,7 +10,7 @@ extension Task {
 //        return NSFetchRequest<Task>(entityName: "Task")
 //    }
 
-    @NSManaged public var id: Int16
+    @NSManaged public var id: UUID
     @NSManaged public var header: String?
     @NSManaged public var text: String?
     @NSManaged public var isCompleted: Bool

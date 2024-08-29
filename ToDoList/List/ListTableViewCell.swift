@@ -3,7 +3,7 @@ import UIKit
 final class ListTableViewCell: UITableViewCell {
 
     static let reuseId = "ListTableViewCell"
-    private var id: Int16?
+    private var id: UUID?
     private var viewController: ListViewProtocol?
     
     private let completedMarker: UIButton = {
@@ -40,9 +40,9 @@ final class ListTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setData(task: Todo, viewController: ListViewController) {
-        let statusTask = task.isCompleted ? "checkmark.square" : "square"
+    func setData(task: Todo, viewController: ListViewProtocol) {
         id = task.id
+        let statusTask = task.isCompleted ? "checkmark.square" : "square"
         completedMarker.setImage(UIImage(systemName: statusTask), for: .normal)
         headerLabel.text = task.text
         dateLabel.text = task.date
@@ -72,13 +72,5 @@ final class ListTableViewCell: UITableViewCell {
     @objc func changeState(sender: UIButton!) {
         viewController?.updateStateOfTask(id: id!)
     }
-    
-//    func setTaskStatus(isDone: Bool) {
-//        if isDone {
-//            completedMarker.setImage(UIImage(systemName: "checkmark.square"), for: .normal)
-//        } else {
-//            completedMarker.setImage(UIImage(systemName: "square"), for: .normal)
-//        }
-//    }
     
 }

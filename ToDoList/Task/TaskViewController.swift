@@ -1,12 +1,14 @@
 import UIKit
 
 protocol TaskViewProtocol: AnyObject {
-    func viewTask(todo: Todo)
+    func viewTask(todo: Todo, newTask: Bool)
 }
 
 class TaskViewController: UIViewController {
 
     var presenter: TaskPresenterProtocol?
+    private var task: Todo?
+    private var isNewTask: Bool?
     
     private let cancelButton: UIButton = {
         let button = UIButton()
@@ -31,9 +33,6 @@ class TaskViewController: UIViewController {
     
     private let textField: UITextView = {
         let textView = UITextView()
-//        textView.attributedText = NSAttributedString(
-//        textField.placeholder = "Описание"
-//        textField.borderStyle = .line
         textView.font = UIFont.systemFont(ofSize: 16)
         return textView
     }()
@@ -42,6 +41,7 @@ class TaskViewController: UIViewController {
         super.viewDidLoad()
         presenter?.viewDidLoaded()
         cancelButton.addTarget(self, action: #selector(closeView), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         view.backgroundColor = .systemBackground
         setupView()
     }
@@ -77,14 +77,35 @@ class TaskViewController: UIViewController {
         dismiss(animated: true)
     }
     
+    @objc func saveButtonTapped(sender: UIButton!) {
+//        if ((headerTextField.text?.isEmpty) == nil) || !textField.text.isEmpty {
+        guard let idTask = isNewTask! ? UUID() : task?.id else { return }
+        let task = Todo(
+            id: idTask,
+            header: headerTextField.text,
+            todo: textField.text,
+            completed: task?.isCompleted ?? false,
+            date: task?.date ?? Date.getCurrectDate()
+        )
+        if isNewTask! {
+            presenter?.saveData(task: task)
+        } else {
+            presenter?.updateData(task: task)
+        }
+//        }
+        dismiss(animated: true)
+    }
+    
 }
 
 extension TaskViewController: TaskViewProtocol {
     
-    func viewTask(todo: Todo) {
+    func viewTask(todo: Todo, newTask: Bool) {
         DispatchQueue.main.async { [self] in
+            task = todo
             headerTextField.text = todo.header
             textField.text = todo.text
+            isNewTask = newTask
         }
     }
     

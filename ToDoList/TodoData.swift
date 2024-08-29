@@ -8,13 +8,13 @@ struct Welcome: Codable {
 
 // MARK: - Todo
 struct Todo: Codable {
-    var id: Int16
-    let header: String?
-    let text: String
+    var id: UUID
+    var header: String?
+    var text: String
     var isCompleted: Bool
     let date: String?
     
-    init(id: Int16, header: String?, todo: String, completed: Bool, date: String) {
+    init(id: UUID, header: String?, todo: String, completed: Bool, date: String) {
         self.id = id
         self.header = header
         self.text = todo
@@ -24,7 +24,7 @@ struct Todo: Codable {
     
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(Int16.self, forKey: .id)
+        id = UUID()
         text = try container.decode(String.self, forKey: .text)
         isCompleted = try container.decode(Bool.self, forKey: .isCompleted)
         header = nil

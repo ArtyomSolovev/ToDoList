@@ -16,7 +16,7 @@ public final class CoreDataManager {
     func createTask(todo: Todo) {
         guard let taskEntityDescription = NSEntityDescription.entity(forEntityName: "Task", in: context) else { return }
         let task = Task(entity: taskEntityDescription, insertInto: context)
-        task.id = Int16(todo.id)
+        task.id = todo.id
         task.header = todo.header
         task.text = todo.text
         task.isCompleted = todo.isCompleted
@@ -32,22 +32,21 @@ public final class CoreDataManager {
         }
     }
     
-    public func fetchTask(with id: Int16) -> Task? {
-        let fetchRequest = NSFetchRequest <NSFetchRequestResult>(entityName: "Task")
-        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
-        do {
-            let task = try? context.fetch(fetchRequest) as? [Task]
-            return task?.first
-        }
-    }
+//    public func fetchTask(with id: UUID) -> Task? {
+//        let fetchRequest = NSFetchRequest <NSFetchRequestResult>(entityName: "Task")
+//        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+//        do {
+//            let task = try? context.fetch(fetchRequest) as? [Task]
+//            return task?.first
+//        }
+//    }
     
     func updataTask(todo: Todo) {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Task" )
-        fetchRequest.predicate = NSPredicate(format: "id == %@", todo.id)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Task")
         do {
             guard let tasks = try? context.fetch(fetchRequest) as? [Task],
-                  let task = tasks.first else { return }
-            task.id = Int16(todo.id)
+                  let task = tasks.first(where: {$0.id == todo.id}) else { return }
+            task.id = todo.id
             task.header = todo.header
             task.text = todo.text
             task.isCompleted = todo.isCompleted
@@ -56,9 +55,8 @@ public final class CoreDataManager {
         appDelegate.saveContext()
     }
     
-    public func deletaTask(with id: Int16) {
+    public func deletaTask(with id: UUID) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Task")
-//        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
         do {
             guard let tasks = try? context.fetch(fetchRequest) as? [Task],
                   let task = tasks.first(where: {$0.id == id}) else { return}

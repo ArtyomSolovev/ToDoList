@@ -2,9 +2,11 @@ import Foundation
 
 protocol ListPresenterProtocol: AnyObject {
     func viewDidLoaded()
-    func didLoad(data: [Todo])
-//    func didTapNewTaskButton()
-    func openTask(task: Todo)
+    func didLoad()
+    func openTask(task: Todo, newTask: Bool)
+    func getTasks() -> [Todo]
+    func removeTask(forIndex: Int)
+    func updateStateOfTask(id: UUID)
 }
 
 class ListPresenter {
@@ -20,27 +22,33 @@ class ListPresenter {
 
 extension ListPresenter: ListPresenterProtocol {
     
-    func openTask(task: Todo) {
-        router.openTask(task: task)
+    func getTasks() -> [Todo] {
+        interactor.getTasks()
+    }
+    
+    func removeTask(forIndex: Int) {
+        interactor.removeTask(forIndex: forIndex)
+    }
+    
+    func updateStateOfTask(id: UUID) {
+        interactor.updateStateOfTask(id: id)
+    }
+    
+    func openTask(task: Todo, newTask: Bool) {
+        router.openTask(task: task, newTask: newTask)
     }
     
     func viewDidLoaded() {
-        interactor.loadToDo()
+        if UserDefaults.standard.bool(forKey: "notFirstStart") {
+            interactor.loadFromCoreData()
+        } else {
+            interactor.loadFromAPI()
+            UserDefaults.standard.setValue(true, forKey: "notFirstStart")
+        }
     }
     
-    func didLoad(data: [Todo]) {
-        view?.showData(data: data)
+    func didLoad() {
+        view?.showData()
     }
-    
-//    func didTapNewTaskButton() {
-//        let task = Todo(
-//            id: 0,
-//            header: "",
-//            todo: "",
-//            completed: false,
-//            date: Date.getCurrectDate()
-//        )
-//        router.openTask(task: task)
-//    }
     
 }

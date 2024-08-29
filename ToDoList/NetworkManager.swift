@@ -17,7 +17,7 @@ final class NetworkManager {
                 var todos = [Todo]()
                 data.todos.forEach {
                     let todo = Todo(
-                            id: $0.id,
+                            id: UUID(),
                             header: $0.header,
                             todo: $0.text,
                             completed: $0.isCompleted,
