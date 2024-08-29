@@ -59,7 +59,15 @@ class ListViewController: UIViewController {
     }
     
     @objc func createTask(sender: UIButton!) {
-        presenter?.didTapNewTaskButton()
+        let task = Todo(
+            id: Int16(todos.count),
+            header: nil,
+            todo: "",
+            completed: false,
+            date: Date.getCurrectDate()
+        )
+        presenter?.openTask(task: task)
+//        presenter?.didTapNewTaskButton()
     }
 }
 
