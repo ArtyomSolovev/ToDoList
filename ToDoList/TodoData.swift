@@ -8,31 +8,33 @@ struct Welcome: Codable {
 
 // MARK: - Todo
 struct Todo: Codable {
-    let id: Int
+    let id: Int16
     let header: String?
-    let todo: String
-    var completed: Bool
+    let text: String
+    var isCompleted: Bool
     let date: String?
     
-    init(id: Int, header: String?, todo: String, completed: Bool, date: String) {
+    init(id: Int16, header: String?, todo: String, completed: Bool, date: String) {
         self.id = id
         self.header = header
-        self.todo = todo
-        self.completed = completed
+        self.text = todo
+        self.isCompleted = completed
         self.date = date
     }
     
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(Int.self, forKey: .id)
-        todo = try container.decode(String.self, forKey: .todo)
-        completed = try container.decode(Bool.self, forKey: .completed)
+        id = try container.decode(Int16.self, forKey: .id)
+        text = try container.decode(String.self, forKey: .text)
+        isCompleted = try container.decode(Bool.self, forKey: .isCompleted)
         header = nil
         date = nil
     }
     
     enum CodingKeys: String, CodingKey {
-        case id, todo, completed
+        case id
+        case isCompleted = "completed"
+        case text = "todo"
 //        case userID = "userId"
     }
 }

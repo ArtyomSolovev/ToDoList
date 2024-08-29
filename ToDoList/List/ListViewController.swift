@@ -2,7 +2,7 @@ import UIKit
 
 protocol ListViewProtocol: AnyObject {
     func showData(data: [Todo])
-    func updateStateOfTask(id: Int)
+    func updateStateOfTask(id: Int16)
 }
 
 class ListViewController: UIViewController {
@@ -83,10 +83,10 @@ extension ListViewController: UITableViewDataSource {
 
 extension ListViewController: ListViewProtocol {
     
-    func updateStateOfTask(id: Int) {
+    func updateStateOfTask(id: Int16) {
         DispatchQueue.main.async { [self] in
-            let index = todos.firstIndex(where: { $0.id == id})
-            todos[index!].completed.toggle()
+            guard let index = todos.firstIndex(where: { $0.id == id}) else { return }
+            todos[index].isCompleted.toggle()
             tableView.reloadData()
         }
     }

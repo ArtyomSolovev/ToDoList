@@ -18,8 +18,8 @@ public final class CoreDataManager {
         let task = Task(entity: taskEntityDescription, insertInto: context)
         task.id = Int16(todo.id)
         task.header = todo.header
-        task.text = todo.todo
-        task.isCompleted = todo.completed
+        task.text = todo.text
+        task.isCompleted = todo.isCompleted
         task.date = todo.date
         
         appDelegate.saveContext()
@@ -49,8 +49,8 @@ public final class CoreDataManager {
                   let task = tasks.first else { return }
             task.id = Int16(todo.id)
             task.header = todo.header
-            task.text = todo.todo
-            task.isCompleted = todo.completed
+            task.text = todo.text
+            task.isCompleted = todo.isCompleted
             task.date = todo.date
         }
         appDelegate.saveContext()

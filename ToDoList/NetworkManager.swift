@@ -19,8 +19,8 @@ final class NetworkManager {
                     let todo = Todo(
                             id: $0.id,
                             header: $0.header,
-                            todo: $0.todo,
-                            completed: $0.completed,
+                            todo: $0.text,
+                            completed: $0.isCompleted,
                             date: Date.getCurrectDate()
                         )
                     todos.append(todo)
