@@ -65,6 +65,10 @@ class ListViewController: UIViewController {
 
 extension ListViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter?.openTask(task: todos[indexPath.row])
+    }
+    
 }
 
 extension ListViewController: UITableViewDataSource {

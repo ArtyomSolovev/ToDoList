@@ -4,6 +4,7 @@ protocol ListPresenterProtocol: AnyObject {
     func viewDidLoaded()
     func didLoad(data: [Todo])
     func didTapNewTaskButton()
+    func openTask(task: Todo)
 }
 
 class ListPresenter {
@@ -18,6 +19,10 @@ class ListPresenter {
 }
 
 extension ListPresenter: ListPresenterProtocol {
+    
+    func openTask(task: Todo) {
+        router.openTask(task: task)
+    }
     
     func viewDidLoaded() {
         interactor.loadToDo()

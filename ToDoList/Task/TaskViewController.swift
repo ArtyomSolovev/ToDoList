@@ -29,11 +29,13 @@ class TaskViewController: UIViewController {
         return textField
     }()
     
-    private let textField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Описание"
-        textField.borderStyle = .line
-        return textField
+    private let textField: UITextView = {
+        let textView = UITextView()
+//        textView.attributedText = NSAttributedString(
+//        textField.placeholder = "Описание"
+        textView.textAlignment = .natural
+//        textField.borderStyle = .line
+        return textView
     }()
     
     override func viewDidLoad() {
@@ -74,8 +76,9 @@ class TaskViewController: UIViewController {
 extension TaskViewController: TaskViewProtocol {
     
     func viewTask(todo: Todo) {
-        DispatchQueue.main.async {
-            print("text:\(todo)")
+        DispatchQueue.main.async { [self] in
+            headerTextField.text = todo.header
+            textField.text = todo.text
         }
     }
     

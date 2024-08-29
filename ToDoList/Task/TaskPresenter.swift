@@ -2,6 +2,7 @@ import Foundation
 
 protocol TaskPresenterProtocol: AnyObject {
     func viewDidLoaded()
+    func setData(data: Todo)
 }
 
 class TaskPresenter {
@@ -20,6 +21,10 @@ extension TaskPresenter: TaskPresenterProtocol {
     func viewDidLoaded() {
         let task = interactor.getTask()
         view?.viewTask(todo: task)
+    }
+    
+    func setData(data: Todo) {
+        view?.viewTask(todo: data)
     }
     
 }
