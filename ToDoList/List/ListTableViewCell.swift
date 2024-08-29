@@ -3,11 +3,14 @@ import UIKit
 final class ListTableViewCell: UITableViewCell {
 
     static let reuseId = "ListTableViewCell"
+    private var id: Int?
+    private var viewController: ListViewProtocol?
     
     private let completedMarker: UIButton = {
         let button = UIButton()
         button.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         button.setImage(UIImage(systemName: "square"), for: .normal)
+        button.addTarget(self, action: #selector(changeState), for: .touchUpInside)
         return button
     }()
     
@@ -37,11 +40,13 @@ final class ListTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setData(task: Todo) {
+    func setData(task: Todo, viewController: ListViewController) {
         let statusTask = task.completed ? "checkmark.square" : "square"
+        id = task.id
         completedMarker.setImage(UIImage(systemName: statusTask), for: .normal)
         headerLabel.text = task.todo
         dateLabel.text = task.date
+        self.viewController = viewController
     }
     
     private func setupView() {
@@ -64,6 +69,10 @@ final class ListTableViewCell: UITableViewCell {
         ])
     }
     
+    @objc func changeState(sender: UIButton!) {
+        viewController?.updateStateOfTask(id: id!)
+    }
+    
 //    func setTaskStatus(isDone: Bool) {
 //        if isDone {
 //            completedMarker.setImage(UIImage(systemName: "checkmark.square"), for: .normal)
@@ -71,6 +80,5 @@ final class ListTableViewCell: UITableViewCell {
 //            completedMarker.setImage(UIImage(systemName: "square"), for: .normal)
 //        }
 //    }
-    
     
 }

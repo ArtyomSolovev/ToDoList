@@ -11,7 +11,7 @@ struct Todo: Codable {
     let id: Int
     let header: String?
     let todo: String
-    let completed: Bool
+    var completed: Bool
     let date: String?
     
     init(id: Int, header: String?, todo: String, completed: Bool, date: String) {

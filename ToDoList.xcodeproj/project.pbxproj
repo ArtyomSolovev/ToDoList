@@ -70,7 +70,6 @@
 		651550652C7C7AF40025FF74 = {
 			isa = PBXGroup;
 			children = (
-				651550A82C7F41160025FF74 /* Task+CoreDataProperties.swift */,
 				651550702C7C7AF40025FF74 /* ToDoList */,
 				6515506F2C7C7AF40025FF74 /* Products */,
 			);
@@ -140,6 +139,7 @@
 			children = (
 				651550A42C7F3C510025FF74 /* CoreData.xcdatamodeld */,
 				651550AB2C7F41E90025FF74 /* StorageManager.swift */,
+				651550A82C7F41160025FF74 /* Task+CoreDataProperties.swift */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";

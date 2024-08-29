@@ -2,11 +2,12 @@ import UIKit
 
 protocol ListViewProtocol: AnyObject {
     func showData(data: [Todo])
+    func updateStateOfTask(id: Int)
 }
 
 class ListViewController: UIViewController {
     
-    var data = [Todo]()
+    var todos = [Todo]()
     
     let tableView: UITableView = {
         let tableView = UITableView()
@@ -68,22 +69,31 @@ extension ListViewController: UITableViewDelegate {
 
 extension ListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        data.count
+        todos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.reuseId, for: indexPath) as! ListTableViewCell
-        let task = data[indexPath.row]
-        cell.setData(task: task)
+        let task = todos[indexPath.row]
+        cell.setData(task: task, viewController: self)
         return cell
     }
     
 }
 
 extension ListViewController: ListViewProtocol {
+    
+    func updateStateOfTask(id: Int) {
+        DispatchQueue.main.async { [self] in
+            let index = todos.firstIndex(where: { $0.id == id})
+            todos[index!].completed.toggle()
+            tableView.reloadData()
+        }
+    }
+    
     func showData(data: [Todo]) {
         DispatchQueue.main.async {
-            self.data = data
+            self.todos = data
             self.tableView.reloadData()
         }
     }
