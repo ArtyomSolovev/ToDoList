@@ -33,14 +33,15 @@ class TaskViewController: UIViewController {
         let textView = UITextView()
 //        textView.attributedText = NSAttributedString(
 //        textField.placeholder = "Описание"
-        textView.textAlignment = .natural
 //        textField.borderStyle = .line
+        textView.font = UIFont.systemFont(ofSize: 16)
         return textView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoaded()
+        cancelButton.addTarget(self, action: #selector(closeView), for: .touchUpInside)
         view.backgroundColor = .systemBackground
         setupView()
     }
@@ -55,10 +56,10 @@ class TaskViewController: UIViewController {
         NSLayoutConstraint.activate([
             cancelButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 10),
             cancelButton.heightAnchor.constraint(equalTo: saveButton.heightAnchor),
-            cancelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            cancelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             
             saveButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -10),
-            saveButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            saveButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             
             headerTextField.topAnchor.constraint(equalTo: cancelButton.bottomAnchor, constant: 10),
             headerTextField.heightAnchor.constraint(equalTo: saveButton.heightAnchor),
@@ -71,6 +72,11 @@ class TaskViewController: UIViewController {
             textField.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
     }
+    
+    @objc func closeView(sender: UIButton!) {
+        dismiss(animated: true)
+    }
+    
 }
 
 extension TaskViewController: TaskViewProtocol {
