@@ -35,6 +35,5 @@ struct Todo: Codable {
         case id
         case isCompleted = "completed"
         case text = "todo"
-//        case userID = "userId"
     }
 }

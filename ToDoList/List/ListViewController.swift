@@ -8,7 +8,7 @@ protocol ListViewProtocol: AnyObject {
 class ListViewController: UIViewController {
     
     let tableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -85,7 +85,7 @@ extension ListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.reuseId, for: indexPath) as! ListTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.reuseId, for: indexPath) as? ListTableViewCell else { return .init() }
         let tasks = presenter?.getTasks()
         guard let task = tasks?[indexPath.row] else { return cell }
         cell.setData(task: task, viewController: self)
