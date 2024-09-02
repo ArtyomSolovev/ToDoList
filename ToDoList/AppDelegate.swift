@@ -8,8 +8,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    // MARK: UISceneSession Lifecycle
-
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
@@ -20,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let error {
                 print(error.localizedDescription)
             } else {
-                print("CoreData - ", description.url?.absoluteString)
+                print("CoreData - ", description.url?.absoluteString ?? "Not enabled descrption")
             }
         }
         return container
@@ -35,7 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError(error.localizedDescription)
             }
         }
-        
     }
     
 }

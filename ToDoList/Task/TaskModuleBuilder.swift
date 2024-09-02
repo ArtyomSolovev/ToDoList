@@ -1,8 +1,8 @@
 import Foundation
 
-class TaskModuleBuilder {
-    static func build(todo: Todo, newTask: Bool, forDelegate: ListInteractor) -> TaskViewController {
-        let interactor = TaskInteractor(todo: todo, newTask: newTask)
+final class TaskModuleBuilder {
+    static func build(todo: Todo, newTodo: Bool, forDelegate: ListInteractor) -> TaskViewController {
+        let interactor = TaskInteractor(todo: todo, newTodo: newTodo)
         let router = TaskRouter()
         let presenter = TaskPresenter(
             router: router,

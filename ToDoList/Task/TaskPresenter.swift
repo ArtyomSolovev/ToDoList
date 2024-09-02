@@ -2,11 +2,11 @@ import Foundation
 
 protocol TaskPresenterProtocol: AnyObject {
     func viewDidLoaded()
-    func updateData(task: Todo)
-    func saveData(task: Todo)
+    func updateTodo(todo: Todo)
+    func saveTodo(todo: Todo)
 }
 
-class TaskPresenter {
+final class TaskPresenter {
     weak var view: TaskViewProtocol?
     var router: TaskRouterProtocol
     var interactor: TaskInteractorProtocol
@@ -19,19 +19,18 @@ class TaskPresenter {
 
 extension TaskPresenter: TaskPresenterProtocol {
     
-    func updateData(task: Todo) {
-        interactor.updateTask(task: task)
+    func updateTodo(todo: Todo) {
+        interactor.updateTodo(todo: todo)
     }
     
-    func saveData(task: Todo) {
-        interactor.saveTask(task: task)
+    func saveTodo(todo: Todo) {
+        interactor.saveTodo(todo: todo)
     }
-    
     
     func viewDidLoaded() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){ [self] in
-            let task = interactor.getTask()
-            view?.viewTask(todo: task.0, newTask: task.1)
+            let todo = interactor.getTodo()
+            view?.viewTodo(todo: todo.0, newTodo: todo.1)
         }
     }
     

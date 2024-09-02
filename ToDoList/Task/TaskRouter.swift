@@ -4,7 +4,7 @@ protocol TaskRouterProtocol: AnyObject {
     
 }
 
-class TaskRouter {
+final class TaskRouter {
     weak var viewController: TaskViewProtocol?
 }
 

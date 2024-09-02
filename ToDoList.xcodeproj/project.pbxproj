@@ -28,6 +28,7 @@
 		651550A62C7F3C510025FF74 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 651550A42C7F3C510025FF74 /* CoreData.xcdatamodeld */; };
 		651550AA2C7F41160025FF74 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651550A82C7F41160025FF74 /* Task+CoreDataProperties.swift */; };
 		651550AC2C7F41E90025FF74 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651550AB2C7F41E90025FF74 /* CoreDataManager.swift */; };
+		651A97842C85D50300750914 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651A97832C85D50300750914 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		651550A52C7F3C510025FF74 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 		651550A82C7F41160025FF74 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		651550AB2C7F41E90025FF74 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		651A97832C85D50300750914 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				651550712C7C7AF40025FF74 /* AppDelegate.swift */,
 				651550732C7C7AF40025FF74 /* SceneDelegate.swift */,
 				6515509E2C7DF4F40025FF74 /* Extension.swift */,
+				651A97832C85D50300750914 /* Constants.swift */,
 				651A97822C80C6D400750914 /* CoreData */,
 				6515508E2C7C8CC40025FF74 /* API */,
 				651550A02C7E130C0025FF74 /* List */,
@@ -229,6 +232,7 @@
 				6515509B2C7D076C0025FF74 /* TaskPresenter.swift in Sources */,
 				6515509D2C7D07960025FF74 /* TaskRouter.swift in Sources */,
 				651550872C7C83050025FF74 /* ListPresenter.swift in Sources */,
+				651A97842C85D50300750914 /* Constants.swift in Sources */,
 				651550952C7CFB200025FF74 /* TaskViewController.swift in Sources */,
 				651550892C7C84540025FF74 /* ListRouter.swift in Sources */,
 				651550742C7C7AF40025FF74 /* SceneDelegate.swift in Sources */,

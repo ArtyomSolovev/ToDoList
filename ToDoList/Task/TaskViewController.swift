@@ -1,26 +1,26 @@
 import UIKit
 
 protocol TaskViewProtocol: AnyObject {
-    func viewTask(todo: Todo, newTask: Bool)
+    func viewTodo(todo: Todo, newTodo: Bool)
 }
 
 final class TaskViewController: UIViewController {
 
     var presenter: TaskPresenterProtocol?
-    private var task: Todo?
-    private var isNewTask: Bool?
+    private var todo: Todo?
+    private var isNewTodo: Bool?
     
     private let cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle("Отменить", for: .normal)
-        button.setTitleColor(UIColor(named: "textColor"), for: .normal)
+        button.setTitleColor(UIColor(named: Constants.textColor.rawValue), for: .normal)
         return button
     }()
     
     private let saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("Сохранить", for: .normal)
-        button.setTitleColor(UIColor(named: "textColor"), for: .normal)
+        button.setTitleColor(UIColor(named: Constants.textColor.rawValue), for: .normal)
         return button
     }()
     
@@ -80,18 +80,18 @@ final class TaskViewController: UIViewController {
     }
     
     @objc func saveButtonTapped(sender: UIButton!) {
-        guard let idTask = isNewTask! ? UUID() : task?.id else { return }
-        let task = Todo(
-            id: idTask,
+        guard let idOfTodo = isNewTodo! ? UUID() : todo?.id else { return }
+        let todo = Todo(
+            id: idOfTodo,
             header: headerTextField.text,
             todo: textField.text,
-            completed: task?.isCompleted ?? false,
-            date: task?.date ?? Date.getCurrectDate()
+            completed: todo?.isCompleted ?? false,
+            date: todo?.date ?? Date.getCurrectDate()
         )
-        if isNewTask! {
-            presenter?.saveData(task: task)
+        if isNewTodo! {
+            presenter?.saveTodo(todo: todo)
         } else {
-            presenter?.updateData(task: task)
+            presenter?.updateTodo(todo: todo)
         }
         dismiss(animated: true)
     }
@@ -106,12 +106,12 @@ final class TaskViewController: UIViewController {
 
 extension TaskViewController: TaskViewProtocol {
     
-    func viewTask(todo: Todo, newTask: Bool) {
+    func viewTodo(todo: Todo, newTodo: Bool) {
         DispatchQueue.main.async { [self] in
-            task = todo
+            self.todo = todo
             headerTextField.text = todo.header
             textField.text = todo.text
-            isNewTask = newTask
+            self.isNewTodo = newTodo
             changeStateOfSaveButton()
         }
     }

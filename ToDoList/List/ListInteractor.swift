@@ -3,35 +3,35 @@ import Foundation
 protocol ListInteractorProtocol {
     func loadFromAPI()
     func loadFromCoreData()
-    func getTasks() -> [Todo]
-    func removeTask(forIndex: Int)
-    func updateStateOfTask(id: UUID)
+    func getTodos() -> [Todo]
+    func removeTodo(forIndex: Int)
+    func updateStateOfTodo(id: UUID)
 }
 
-class ListInteractor {
+final class ListInteractor {
     weak var presenter: ListPresenterProtocol?
-    private var tasks: [Todo]?
+    private var todos: [Todo]?
 }
 
 extension ListInteractor: ListInteractorProtocol {
     
-    func getTasks() -> [Todo] {
-        guard let tasks = tasks else { return [] }
-        return tasks
+    func getTodos() -> [Todo] {
+        guard let todos = todos else { return [] }
+        return todos
     }
     
-    func removeTask(forIndex: Int) {
-        guard let task = tasks?[forIndex].id else { return }
-        CoreDataManager.shared.deletaTask(with: task)
-        tasks?.remove(at: forIndex)
+    func removeTodo(forIndex: Int) {
+        guard let todo = todos?[forIndex].id else { return }
+        CoreDataManager.shared.deletaTodo(with: todo)
+        todos?.remove(at: forIndex)
     }
     
-    func updateStateOfTask(id: UUID) {
+    func updateStateOfTodo(id: UUID) {
         DispatchQueue.main.async { [self] in
-            guard let index = tasks?.firstIndex(where: { $0.id == id}) else { return }
-            tasks?[index].isCompleted.toggle()
-            guard let task = tasks?[index] else { return }
-            CoreDataManager.shared.updataTask(todo: task)
+            guard let index = todos?.firstIndex(where: { $0.id == id}) else { return }
+            todos?[index].isCompleted.toggle()
+            guard let todo = todos?[index] else { return }
+            CoreDataManager.shared.updataTodo(todo: todo)
         }
     }
     
@@ -40,10 +40,10 @@ extension ListInteractor: ListInteractorProtocol {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let todos):
-                    self?.tasks = todos
+                    self?.todos = todos
                     self?.presenter?.didLoad()
-                    todos.forEach { task in
-                        CoreDataManager.shared.createTask(todo: task)
+                    todos.forEach { todo in
+                        CoreDataManager.shared.createTodo(todo: todo)
                     }
                 case .failure(let failure):
                     fatalError("Fail:\(failure)")
@@ -55,17 +55,17 @@ extension ListInteractor: ListInteractorProtocol {
     
     func loadFromCoreData() {
         var todos = [Todo]()
-        CoreDataManager.shared.fetchTasks().forEach { task in
+        CoreDataManager.shared.fetchTodos().forEach { todo in
             let todo = Todo(
-                id: task.id,
-                header: task.header,
-                todo: task.text ?? "",
-                completed: task.isCompleted,
-                date: task.date ?? ""
+                id: todo.id,
+                header: todo.header,
+                todo: todo.text ?? "",
+                completed: todo.isCompleted,
+                date: todo.date ?? ""
             )
             todos.append(todo)
         }
-        self.tasks = todos
+        self.todos = todos
         self.presenter?.didLoad()
     }
     
@@ -73,14 +73,14 @@ extension ListInteractor: ListInteractorProtocol {
 
 extension ListInteractor: TaskInteractoreDelegate {
     
-    func saveTask(task: Todo) {
-        tasks?.append(task)
+    func saveTodo(todo: Todo) {
+        todos?.append(todo)
         presenter?.didLoad()
     }
     
-    func updateTask(task: Todo) {
-        guard let index = tasks?.firstIndex(where: { $0.id == task.id }) else { return }
-        tasks?[index] = task
+    func updateTodo(todo: Todo) {
+        guard let index = todos?.firstIndex(where: { $0.id == todo.id }) else { return }
+        todos?[index] = todo
         presenter?.didLoad()
     }
     

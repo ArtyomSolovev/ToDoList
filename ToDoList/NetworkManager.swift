@@ -6,10 +6,8 @@ final class NetworkManager {
 
     private init(){}
     
-    let urlString = "https://dummyjson.com/todos"
-    
     func fetchData(completion: @escaping (Result<[Todo], Error>) -> Void) {
-        guard let url = URL(string: urlString) else { return }
+        guard let url = URL(string: Constants.apiURLSting.rawValue) else { return }
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else { return }
             do {

@@ -1,46 +1,46 @@
 import Foundation
 
 protocol TaskInteractorProtocol {
-    func getTask() -> (Todo, Bool)
-    func saveTask(task: Todo)
-    func updateTask(task: Todo)
+    func getTodo() -> (Todo, Bool)
+    func saveTodo(todo: Todo)
+    func updateTodo(todo: Todo)
 }
 
 protocol TaskInteractoreDelegate: AnyObject {
-    func saveTask(task: Todo)
-    func updateTask(task: Todo)
+    func saveTodo(todo: Todo)
+    func updateTodo(todo: Todo)
 }
 
-class TaskInteractor {
+final class TaskInteractor {
     
     weak var presenter: TaskPresenterProtocol?
     weak var delegate: TaskInteractoreDelegate?
     
-    let todo: Todo
-    let newTask: Bool
+    private let todo: Todo
+    private let newTodo: Bool
     
-    init(presenter: TaskPresenterProtocol? = nil, todo: Todo, newTask: Bool) {
+    init(presenter: TaskPresenterProtocol? = nil, todo: Todo, newTodo: Bool) {
         self.presenter = presenter
         self.todo = todo
-        self.newTask = newTask
+        self.newTodo = newTodo
     }
     
 }
 
 extension TaskInteractor: TaskInteractorProtocol {
     
-    func saveTask(task: Todo) {
-        CoreDataManager.shared.createTask(todo: task)
-        delegate?.saveTask(task: task)
+    func saveTodo(todo: Todo) {
+        CoreDataManager.shared.createTodo(todo: todo)
+        delegate?.saveTodo(todo: todo)
     }
     
-    func updateTask(task: Todo) {
-        CoreDataManager.shared.updataTask(todo: task)
-        delegate?.updateTask(task: task)
+    func updateTodo(todo: Todo) {
+        CoreDataManager.shared.updataTodo(todo: todo)
+        delegate?.updateTodo(todo: todo)
     }
     
-    func getTask() -> (Todo, Bool)  {
-        (todo, newTask)
+    func getTodo() -> (Todo, Bool)  {
+        (todo, newTodo)
     }
     
 }

@@ -26,10 +26,6 @@ final class ListTableViewCell: UITableViewCell {
         return label
     }()
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
@@ -39,16 +35,6 @@ final class ListTableViewCell: UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setData(task: Todo, viewController: ListViewProtocol) {
-        id = task.id
-        let statusTask = task.isCompleted ? "checkmark.square" : "square"
-        completedMarker.setImage(UIImage(systemName: statusTask), for: .normal)
-        let isTodoHaveNotHeader = task.header == "" || task.header == nil
-        headerLabel.text = isTodoHaveNotHeader ? task.text : task.header
-        dateLabel.text = task.date
-        self.viewController = viewController
     }
     
     private func setupView() {
@@ -71,8 +57,18 @@ final class ListTableViewCell: UITableViewCell {
         ])
     }
     
-    @objc func changeState(sender: UIButton!) {
-        viewController?.updateStateOfTask(id: id!)
+    @objc private func changeState(sender: UIButton!) {
+        viewController?.updateStateOfTodo(id: id!)
+    }
+    
+    func setData(todo: Todo, viewController: ListViewProtocol) {
+        id = todo.id
+        let statusOfTodo = todo.isCompleted ? "checkmark.square" : "square"
+        completedMarker.setImage(UIImage(systemName: statusOfTodo), for: .normal)
+        let isTodoHaveNotHeader = todo.header == "" || todo.header == nil
+        headerLabel.text = isTodoHaveNotHeader ? todo.text : todo.header
+        dateLabel.text = todo.date
+        self.viewController = viewController
     }
     
 }

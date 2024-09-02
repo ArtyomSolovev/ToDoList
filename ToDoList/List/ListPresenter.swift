@@ -3,13 +3,13 @@ import Foundation
 protocol ListPresenterProtocol: AnyObject {
     func viewDidLoaded()
     func didLoad()
-    func openTask(task: Todo, newTask: Bool)
-    func getTasks() -> [Todo]
-    func removeTask(forIndex: Int)
-    func updateStateOfTask(id: UUID)
+    func openTodo(todo: Todo, newTodo: Bool)
+    func getTodos() -> [Todo]
+    func removeTodo(forIndex: Int)
+    func updateStateOfTodo(id: UUID)
 }
 
-class ListPresenter {
+final class ListPresenter {
     weak var view: ListViewProtocol?
     var router: ListRouterProtocol
     var interactor: ListInteractorProtocol
@@ -22,34 +22,34 @@ class ListPresenter {
 
 extension ListPresenter: ListPresenterProtocol {
     
-    func getTasks() -> [Todo] {
-        interactor.getTasks()
+    func getTodos() -> [Todo] {
+        interactor.getTodos()
     }
     
-    func removeTask(forIndex: Int) {
-        interactor.removeTask(forIndex: forIndex)
+    func removeTodo(forIndex: Int) {
+        interactor.removeTodo(forIndex: forIndex)
     }
     
-    func updateStateOfTask(id: UUID) {
-        interactor.updateStateOfTask(id: id)
+    func updateStateOfTodo(id: UUID) {
+        interactor.updateStateOfTodo(id: id)
     }
     
-    func openTask(task: Todo, newTask: Bool) {
+    func openTodo(todo: Todo, newTodo: Bool) {
         guard let interactorForDelegate = interactor as? ListInteractor else { return }
-        router.openTask(task: task, newTask: newTask, forDelegate: interactorForDelegate)
+        router.openTodo(todo: todo, newTodo: newTodo, forDelegate: interactorForDelegate)
     }
     
     func viewDidLoaded() {
-        if UserDefaults.standard.bool(forKey: "notFirstStart") {
+        if UserDefaults.standard.bool(forKey: Constants.keyNotFirstStart.rawValue) {
             interactor.loadFromCoreData()
         } else {
             interactor.loadFromAPI()
-            UserDefaults.standard.setValue(true, forKey: "notFirstStart")
+            UserDefaults.standard.setValue(true, forKey: Constants.keyNotFirstStart.rawValue)
         }
     }
     
     func didLoad() {
-        view?.showData()
+        view?.reloadData()
     }
     
 }
