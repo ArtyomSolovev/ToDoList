@@ -80,7 +80,7 @@ final class TaskViewController: UIViewController {
     }
     
     @objc func saveButtonTapped(sender: UIButton!) {
-        guard let idOfTodo = isNewTodo! ? UUID() : todo?.id else { return }
+        guard let isNewTodo, let idOfTodo = isNewTodo ? UUID() : todo?.id else { return }
         let todo = Todo(
             id: idOfTodo,
             header: headerTextField.text,
@@ -88,7 +88,7 @@ final class TaskViewController: UIViewController {
             completed: todo?.isCompleted ?? false,
             date: todo?.date ?? Date.getCurrectDate()
         )
-        if isNewTodo! {
+        if isNewTodo {
             presenter?.saveTodo(todo: todo)
         } else {
             presenter?.updateTodo(todo: todo)

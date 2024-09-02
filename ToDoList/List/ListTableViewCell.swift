@@ -58,7 +58,8 @@ final class ListTableViewCell: UITableViewCell {
     }
     
     @objc private func changeState(sender: UIButton!) {
-        viewController?.updateStateOfTodo(id: id!)
+        guard let id else { return }
+        viewController?.updateStateOfTodo(id: id)
     }
     
     func setData(todo: Todo, viewController: ListViewProtocol) {
