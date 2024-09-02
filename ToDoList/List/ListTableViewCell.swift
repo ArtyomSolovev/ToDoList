@@ -10,7 +10,6 @@ final class ListTableViewCell: UITableViewCell {
         let button = UIButton()
         button.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         button.setImage(UIImage(systemName: "square"), for: .normal)
-        button.addTarget(self, action: #selector(changeState), for: .touchUpInside)
         return button
     }()
     
@@ -34,6 +33,7 @@ final class ListTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
+        completedMarker.addTarget(self, action: #selector(changeState), for: .touchUpInside)
         setupView()
     }
     

@@ -18,8 +18,6 @@ class ListViewController: UIViewController {
         button.setTitle("Новая задача", for: .normal)
         button.setTitleColor(UIColor(named: "textColor"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-//        button.layer.cornerRadius = 10
-//        button.clipsToBounds = true
         return button
     }()
 

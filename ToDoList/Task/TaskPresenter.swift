@@ -4,7 +4,6 @@ protocol TaskPresenterProtocol: AnyObject {
     func viewDidLoaded()
     func updateData(task: Todo)
     func saveData(task: Todo)
-//    func setData(data: Todo)
 }
 
 class TaskPresenter {
@@ -35,9 +34,5 @@ extension TaskPresenter: TaskPresenterProtocol {
             view?.viewTask(todo: task.0, newTask: task.1)
         }
     }
-    
-//    func setData(data: Todo) {
-//        view?.viewTask(todo: data, newTask: <#Bool#>)
-//    }
     
 }
