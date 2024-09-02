@@ -20,6 +20,9 @@ final class ListViewController: UIViewController {
         button.setTitle("Новая задача", for: .normal)
         button.setTitleColor(UIColor(named: Constants.textColor.rawValue), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 10
+        button.layer.borderWidth = 2
+        button.layer.borderColor = CGColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
         return button
     }()
     
@@ -48,8 +51,8 @@ final class ListViewController: UIViewController {
         view.addSubview(button)
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(equalTo: tableView.bottomAnchor),
-            button.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            button.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            button.leftAnchor.constraint(equalTo: view.leftAnchor),
+            button.rightAnchor.constraint(equalTo: view.rightAnchor),
             button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
