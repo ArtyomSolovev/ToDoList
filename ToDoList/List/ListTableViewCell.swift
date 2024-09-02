@@ -45,7 +45,8 @@ final class ListTableViewCell: UITableViewCell {
         id = task.id
         let statusTask = task.isCompleted ? "checkmark.square" : "square"
         completedMarker.setImage(UIImage(systemName: statusTask), for: .normal)
-        headerLabel.text = task.text
+        let isTodoHaveNotHeader = task.header == "" || task.header == nil
+        headerLabel.text = isTodoHaveNotHeader ? task.text : task.header
         dateLabel.text = task.date
         self.viewController = viewController
     }
