@@ -4,7 +4,7 @@ protocol TaskViewProtocol: AnyObject {
     func viewTask(todo: Todo, newTask: Bool)
 }
 
-class TaskViewController: UIViewController {
+final class TaskViewController: UIViewController {
 
     var presenter: TaskPresenterProtocol?
     private var task: Todo?
@@ -42,6 +42,8 @@ class TaskViewController: UIViewController {
         presenter?.viewDidLoaded()
         cancelButton.addTarget(self, action: #selector(closeView), for: .touchUpInside)
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+        headerTextField.delegate = self
+        textField.delegate = self
         view.backgroundColor = .systemBackground
         setupView()
     }
@@ -78,7 +80,6 @@ class TaskViewController: UIViewController {
     }
     
     @objc func saveButtonTapped(sender: UIButton!) {
-//        if ((headerTextField.text?.isEmpty) == nil) || !textField.text.isEmpty {
         guard let idTask = isNewTask! ? UUID() : task?.id else { return }
         let task = Todo(
             id: idTask,
@@ -92,8 +93,13 @@ class TaskViewController: UIViewController {
         } else {
             presenter?.updateData(task: task)
         }
-//        }
         dismiss(animated: true)
+    }
+    
+    private func changeStateOfSaveButton() {
+        let isEnabled = !headerTextField.text!.isEmpty || !textField.text.isEmpty
+        saveButton.isEnabled = isEnabled
+        saveButton.alpha = isEnabled ? 1 : 0.1
     }
     
 }
@@ -106,7 +112,24 @@ extension TaskViewController: TaskViewProtocol {
             headerTextField.text = todo.header
             textField.text = todo.text
             isNewTask = newTask
+            changeStateOfSaveButton()
         }
+    }
+    
+}
+
+extension TaskViewController: UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        changeStateOfSaveButton()
+    }
+
+}
+
+extension TaskViewController: UITextFieldDelegate {
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        changeStateOfSaveButton()
     }
     
 }
